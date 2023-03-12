@@ -2,6 +2,7 @@ package com.android.comic.core.di
 
 import com.android.comic.data.comic.ComicDataSource
 import com.android.comic.data.comic.ComicRepository
+import com.android.comic.data.comic.DefaultComicRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +14,6 @@ internal class RepositoryModule {
 
     @Provides
     fun provideComicRepository(comicDataSource: ComicDataSource): ComicRepository {
-        return ComicRepository(comicDataSource)
+        return DefaultComicRepository(comicDataSource)
     }
 }
