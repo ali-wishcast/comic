@@ -1,0 +1,32 @@
+com.github.bumptech.glide:*
+           ^^^^^^^^^^^^^^
+
+androidx.compose.*:*
+^^^^^^^^.^^^^^^^
+
+androidx.compose.compiler:compiler
+^^^^^^^^.^^^^^^^.^^^^^^^^
+
+com.google.accompanist:accompanist-navigation-animation(-*)
+    ^^^^^^.            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+com.github.barteksc:android-pdf-viewer
+           ^^^^^^^^.^^^^^^^^^^^^^^^^^^
+
+io.github.chaosleung:pinview
+          ^^^^^^^^^^.^^^^^^^
+
+com.chargemap.compose:numberpicker
+    ^^^^^^^^^.        ^^^^^^^^^^^^
+
+io.github.raamcosta.compose-destinations:animations-core
+          ^^^^^^^^^.^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^^^^^^
+
+io.github.raamcosta.compose-destinations:ksp
+          ^^^^^^^^^.^^^^^^^^^^^^^^^^^^^^.^^^
+
+dev.shreyaspatil:capturable
+    ^^^^^^^^^^^^.^^^^^^^^^^
+
+com.github.sebaslogen.resaca:resacahilt
+           ^^^^^^^^^^.^^^^^^.^^^^^^^^^^

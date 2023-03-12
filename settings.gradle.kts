@@ -12,5 +12,18 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+plugins {
+    id("de.fayard.refreshVersions") version "0.50.1"
+}
+
+refreshVersions {
+    extraArtifactVersionKeyRules(file("refreshVersions.rules"))
+    rejectVersionIf {
+        candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
+    }
+}
+
 rootProject.name = "Comic"
-include ':app'
+
+include(":app")
