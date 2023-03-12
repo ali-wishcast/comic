@@ -3,14 +3,14 @@ package com.android.comic.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
+import com.android.comic.ui.comic.NavGraphs
 import com.android.comic.ui.theme.AppTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.rememberNavHostEngine
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity(){
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,11 +26,4 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
-}
-
-@RootNavGraph(start = true)
-@Destination
-@Composable
-fun MainScreen() {
-
 }

@@ -220,6 +220,8 @@ dependencies {
 
     // test libs
     testImplementation(Testing.junit4)
+    testImplementation(KotlinX.coroutines.test)
+    testImplementation("com.google.truth:truth:1.1.2")
     androidTestImplementation(platform(KotlinX.coroutines.bom))
     androidTestImplementation(KotlinX.coroutines.test)
     androidTestImplementation(AndroidX.test.core)
