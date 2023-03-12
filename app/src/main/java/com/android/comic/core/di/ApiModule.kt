@@ -1,6 +1,6 @@
 package com.android.comic.core.di
 
-import com.android.comic.data.comic.ComicApi
+import com.android.comic.data.comic.remote.ComicApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

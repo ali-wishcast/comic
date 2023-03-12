@@ -1,6 +1,7 @@
 package com.android.comic.data.comic
 
 import com.android.comic.data.comic.entities.Comic
+import com.android.comic.data.comic.remote.ComicRemoteDataSource
 import javax.inject.Inject
 
 interface ComicRepository {
@@ -8,10 +9,10 @@ interface ComicRepository {
 }
 
 class DefaultComicRepository @Inject constructor(
-    private val comicDataSource: ComicDataSource,
+    private val comicRemoteDataSource: ComicRemoteDataSource,
 ) : ComicRepository {
 
     override suspend fun getComicDetail(id: Int): Result<Comic> {
-        return comicDataSource.getComicDetail(id)
+        return comicRemoteDataSource.getComicDetail(id)
     }
 }

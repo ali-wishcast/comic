@@ -1,4 +1,4 @@
-package com.android.comic.data.comic
+package com.android.comic.data.comic.remote
 
 import com.android.comic.data.comic.entities.Comic
 import retrofit2.Response

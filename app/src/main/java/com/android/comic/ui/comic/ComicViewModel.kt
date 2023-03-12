@@ -87,7 +87,8 @@ class ComicViewModel @Inject constructor(
                     throwable.message?.let {
                         viewModelState.update { currentViewModelState ->
                             currentViewModelState.copy(
-                                errorMessage = "",
+                                comic = null,
+                                errorMessage = it,
                                 isLoading = false,
                             )
                         }
