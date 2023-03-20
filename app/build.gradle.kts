@@ -231,6 +231,7 @@ dependencies {
     androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation(Google.dagger.hilt.android.testing)
     androidTestImplementation(Testing.kotest.assertions.core)
+    testImplementation("io.mockk:mockk:1.13.4")
 }
 
 // Allow references to generated code

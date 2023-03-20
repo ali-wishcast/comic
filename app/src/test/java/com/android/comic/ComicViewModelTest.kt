@@ -1,9 +1,14 @@
 package com.android.comic
 
+import com.android.comic.data.comic.ComicRepository
 import com.android.comic.data.comic.entities.Comic
 import com.android.comic.ui.comic.ComicViewModel
+import com.android.comic.ui.comic.FIRST_COMIC_ID
+import com.android.comic.ui.comic.LAST_COMIC_ID
 import com.android.comic.ui.comic.models.ComicUiState
 import com.google.common.truth.Truth.assertThat
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -22,53 +27,60 @@ class ComicViewModelTest {
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
 
-    // Subject under test
+    private val comicRepository = mockk<ComicRepository>()
     private lateinit var comicViewModel: ComicViewModel
 
-    // Use a fake repository to be injected into the viewmodel
-    private lateinit var comicRepository: TestComicRepository
     private val comic = Comic(
-        alt = "alt",
-        day = "21",
-        img = "https://imgs.xkcd.com/comics/xkcloud.png",
-        link = "",
-        month = "2",
-        news = "news",
-        num = 1,
-        safe_title = "safe title",
-        title = "title",
-        transcript = "this is a transcript",
-        year = "2023"
+        "alt",
+        "21",
+        "https://imgs.xkcd.com/comics/xkcloud.png",
+        "",
+        "2",
+        "news",
+        1,
+        "safe title",
+        "title",
+        "this is a transcript",
+        "2023"
     )
 
+
     @Before
-    fun setupViewModel() {
-        comicRepository = TestComicRepository()
-        comicRepository.comicList.add(comic)
-
-        comicViewModel = ComicViewModel(
-            comicRepository
-        )
+    fun setup() {
+        coEvery {
+            comicRepository.getComicDetail(
+                range(
+                    FIRST_COMIC_ID,
+                    LAST_COMIC_ID
+                )
+            )
+        } returns Result.success(comic)
+        coEvery {
+            comicRepository.getComicDetail(
+                more(LAST_COMIC_ID)
+            )
+        } returns Result.failure(Throwable())
+        comicViewModel = ComicViewModel(comicRepository)
     }
 
     @Test
-    fun stateIsInitiallyLoading() = runTest {
+    fun `Test loading state is shown before the content`() = runTest {
         assertThat((comicViewModel.uiState.first() as ComicUiState.Content).isLoading)
-            .isEqualTo(false)
+            .isEqualTo(true)
     }
 
     @Test
-    fun getComicFromRepositoryAndLoadIntoView() = runTest {
+    fun `get comic from repository and load into view`() = runTest {
+        comicViewModel.getFirstComic()
         val uiState = comicViewModel.uiState.first() as ComicUiState.Content
         // Then verify that the view was notified
-        assertThat(uiState.comic?.title).isEqualTo(comic.title)
-        assertThat(uiState.comic?.transcript).isEqualTo(comic.transcript)
+        assertThat(uiState.comic).isEqualTo(comic)
     }
 
     @Test
-    fun comicViewModel_repositoryError() = runTest {
+    fun `get comic from repository and get error`() = runTest {
         // Given a repository that throws errors
-        comicRepository.setShouldThrowError(true)
+        comicViewModel.getComicDetail(LAST_COMIC_ID + 1)
 
         // Then the comic is null and the screen shows a loading error message
         assertThat((comicViewModel.uiState.value as ComicUiState.Content).comic).isNull()

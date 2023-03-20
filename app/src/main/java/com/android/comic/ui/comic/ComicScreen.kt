@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,11 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 fun ComicScreen(
     comicViewModel: ComicViewModel = hiltViewModel(),
 ) {
+
+    LaunchedEffect(Unit) {
+        comicViewModel.getFirstComic()
+    }
+
     when (val uiState = comicViewModel.uiState.collectAsStateWithLifecycle().value) {
         is ComicUiState.Content -> {
             ComicContent(

@@ -41,11 +41,7 @@ class ComicViewModel @Inject constructor(
             viewModelState.value.toUiState(),
         )
 
-    init {
-        getFirstComic()
-    }
-
-    private fun getFirstComic() {
+    fun getFirstComic() {
         getComicDetail(FIRST_COMIC_ID)
         updateNavigationButtonsState(FIRST_COMIC_ID)
     }
@@ -68,7 +64,7 @@ class ComicViewModel @Inject constructor(
         getComicDetail(currentComicId + 1)
     }
 
-    private fun getComicDetail(id: Int) {
+    fun getComicDetail(id: Int) {
         updateCurrentComicId(id)
         showLoading()
         viewModelScope.launch {

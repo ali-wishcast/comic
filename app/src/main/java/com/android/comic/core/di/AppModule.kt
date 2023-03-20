@@ -65,7 +65,7 @@ class AppModule {
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(json.asConverterFactory(contentType))
-            .build();
+            .build()
     }
 
     @OptIn(ExperimentalSerializationApi::class)
